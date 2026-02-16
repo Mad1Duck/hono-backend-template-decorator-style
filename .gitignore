@@ -33,7 +33,7 @@ coverage/
 .vscode/
 .idea/
 *.swp
-*.swo 
+*.swo
 *~
 .DS_Store
 
@@ -64,6 +64,3 @@ bun.lockb
 
 # Optional
 .env.backup
-
-
-# Mad1Duck/hono-backend-template-decorator-style
