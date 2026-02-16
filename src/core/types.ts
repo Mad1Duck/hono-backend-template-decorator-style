@@ -6,7 +6,7 @@ import { Context } from "hono";
  * Abstract constructor type for classes that can't be instantiated directly
  */
 export type AbstractConstructor<T = unknown> = abstract new (
-  ...args: any[] // ✅ Changed from never[]
+  ...args: any[]
 ) => T;
 
 /**
@@ -14,7 +14,7 @@ export type AbstractConstructor<T = unknown> = abstract new (
  * @template T - The type of instance this constructor creates
  */
 export type ConcreteConstructor<T = unknown> = new (
-  ...args: any[] // ✅ Changed from never[] to any[]
+  ...args: any[]
 ) => T;
 
 /**

@@ -134,7 +134,6 @@ export function Audit(options: { action: string; }): MethodDecorator {
       },
       ...args: unknown[]
     ) {
-      // Sama seperti LogActivity — fallback ke createLogger jika this.logger tidak ada
       const log = this.logger ?? createLogger(target.constructor.name);
 
       log.info?.(

@@ -12,7 +12,7 @@ export class UserConsumer {
   private readonly queue = 'user.consumer.queue';
 
   constructor() {
-    this.setupQueue();
+    void this.setupQueue();
   }
 
   /**
@@ -44,7 +44,7 @@ export class UserConsumer {
       logger.info({ queue: this.queue }, 'Consumer queue setup complete');
 
       // Start consuming
-      this.consume();
+      void this.consume();
     } catch (error) {
       logger.error({ error }, 'Failed to setup consumer queue');
     }
@@ -97,11 +97,11 @@ export class UserConsumer {
         case 'user.created':
           await this.handleCreated(event);
           break;
-        
+
         case 'user.updated':
           await this.handleUpdated(event);
           break;
-        
+
         case 'user.deleted':
           await this.handleDeleted(event);
           break;
@@ -116,7 +116,7 @@ export class UserConsumer {
 
       // Reject and requeue (with limit)
       const retryCount = (msg.properties.headers?.['x-retry-count'] || 0) + 1;
-      
+
       if (retryCount < 3) {
         channel.reject(msg, true);
       } else {
@@ -132,7 +132,6 @@ export class UserConsumer {
    */
   private async handleCreated(event: UserEvent) {
     logger.debug({ eventId: event.eventId }, 'Handling created event');
-    // Implement your logic here
   }
 
   /**
@@ -140,7 +139,6 @@ export class UserConsumer {
    */
   private async handleUpdated(event: UserEvent) {
     logger.debug({ eventId: event.eventId }, 'Handling updated event');
-    // Implement your logic here
   }
 
   /**
@@ -148,6 +146,5 @@ export class UserConsumer {
    */
   private async handleDeleted(event: UserEvent) {
     logger.debug({ eventId: event.eventId }, 'Handling deleted event');
-    // Implement your logic here
   }
 }

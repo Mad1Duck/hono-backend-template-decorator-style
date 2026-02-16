@@ -11,7 +11,7 @@ export interface AuthPayload {
   userId: string;
   email: string;
   role: string;
-  roles?: string[]; // Support multiple roles
+  roles?: string[];
   permissions?: string[];
   iat?: number;
   exp?: number;
@@ -31,7 +31,6 @@ export type HonoMiddlewareFn = (
 export class AuthMiddleware implements MiddlewareClass {
   async use(c: Context, next: Next): Promise<Response | void> {
     try {
-      // Extract token from Authorization header
       const authHeader = c.req.header('authorization');
       const token = authHeader?.startsWith('Bearer ')
         ? authHeader.substring(7)
@@ -50,10 +49,8 @@ export class AuthMiddleware implements MiddlewareClass {
         );
       }
 
-      // Verify JWT token
       const payload = jwt.verify(token, env.JWT_SECRET) as AuthPayload;
 
-      // Normalize roles (support both `role` and `roles`)
       if (payload.role && !payload.roles) {
         payload.roles = [payload.role];
       }
@@ -74,7 +71,6 @@ export class AuthMiddleware implements MiddlewareClass {
     } catch (error) {
       logger.error({ err: error }, 'Authentication failed');
 
-      // Handle specific JWT errors
       if (error instanceof jwt.TokenExpiredError) {
         return c.json(
           {
@@ -101,7 +97,6 @@ export class AuthMiddleware implements MiddlewareClass {
         );
       }
 
-      // Generic auth error
       return c.json(
         {
           status: 'error',
@@ -126,7 +121,6 @@ export function RequireRole(...roles: string[]): HonoMiddlewareFn {
   return async (c: Context, next: Next) => {
     const user = c.get('user') as AuthPayload | undefined;
 
-    // Check if user is authenticated
     if (!user) {
       return c.json(
         {
@@ -140,7 +134,6 @@ export function RequireRole(...roles: string[]): HonoMiddlewareFn {
       );
     }
 
-    // Check if user has any of the required roles
     const userRoles = user.roles || (user.role ? [user.role] : []);
     const hasRole = roles.some((role) => userRoles.includes(role));
 
@@ -180,7 +173,6 @@ export function RequirePermission(...permissions: string[]): HonoMiddlewareFn {
   return async (c: Context, next: Next) => {
     const user = c.get('user') as AuthPayload | undefined;
 
-    // Check if user is authenticated
     if (!user) {
       return c.json(
         {
@@ -303,7 +295,6 @@ export async function OptionalAuth(c: Context, next: Next): Promise<void> {
     if (token) {
       const payload = jwt.verify(token, env.JWT_SECRET) as AuthPayload;
 
-      // Normalize roles
       if (payload.role && !payload.roles) {
         payload.roles = [payload.role];
       }

@@ -56,7 +56,6 @@ export interface ParamMetadata {
   index: number;
   name?: string;
 
-  // 🔥 SAFE VERSION
   schema?: ZodType<unknown, ZodTypeDef, unknown>;
 }
 
@@ -79,7 +78,6 @@ export type HonoMiddlewareFn = (c: Context, next: Next) => Promise<Response | vo
 export interface ValidationMetadata {
   type: 'body' | 'query' | 'params';
 
-  // 🔥 SAFE VERSION
   schema: ZodType<unknown, ZodTypeDef, unknown>;
 }
 

@@ -197,7 +197,6 @@ interface SaveLogsPayload {
 }
 
 async function saveAllLogs(data: SaveLogsPayload): Promise<void> {
-  // ← Jika tidak ada reqData (route tidak via HTTP), skip httpLogs
   const method = data.reqData ? toMethod(data.reqData.method) : 'GET';
   const url = data.reqData?.url ?? '';
   const pathStr = data.reqData?.path ?? '';

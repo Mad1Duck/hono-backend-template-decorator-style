@@ -71,7 +71,6 @@ export const logConfig: LogConfig = {
 
 /* ================= TRANSPORT BUILDER ================= */
 
-// ← Return pino.DestinationStream — selalu panggil pino.transport() di dalam
 function buildTransport(): pino.DestinationStream {
   if (isDevelopment) {
     return pino.transport({

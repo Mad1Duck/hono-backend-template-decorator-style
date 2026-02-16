@@ -87,7 +87,6 @@ export abstract class UserBaseRepository {
 
     return or(
       ilike(userTable.name, `%${search}%`),
-      // Add more searchable fields here
     );
   }
 }

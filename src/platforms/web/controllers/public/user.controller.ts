@@ -16,7 +16,7 @@ import {
   ValidatedBody,
   ValidatedQuery,
   ValidatedParam,
-  Middleware,         // ← tambah
+  Middleware,
 } from '@/decorators';
 import {
   AuthMiddleware,
