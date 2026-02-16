@@ -60,8 +60,6 @@ export class Container {
   private factories = new Map<InjectionToken, Factory>();
   private resolutionStack: string[] = []; // For circular dependency detection
 
-  /* ---------- REGISTER ---------- */
-
   /**
    * Register a singleton instance
    * @param token - Injection token (class or string/symbol)
@@ -98,8 +96,6 @@ export class Container {
   ): void {
     this.factories.set(token, factory);
   }
-
-  /* ---------- RESOLVE ---------- */
 
   /**
    * Resolve a dependency
@@ -383,7 +379,7 @@ export function Singleton(): ClassDecorator {
  * ```
  */
 export function Inject(token: InjectionToken): ParameterDecorator {
-  return (target, propertyKey, parameterIndex) => {
+  return (target, _propertyKey, parameterIndex) => {
     const existingTokens: InjectionToken[] =
       Reflect.getMetadata('inject:tokens', target) || [];
     existingTokens[parameterIndex] = token;

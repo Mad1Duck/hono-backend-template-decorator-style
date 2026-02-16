@@ -26,8 +26,6 @@ interface CleanupResult {
 export class LogCleanerService {
   private job: ScheduledTask | null = null;
 
-  /* ---------- START ---------- */
-
   start(): void {
     const schedule = logConfig.cleanupSchedule;
 
@@ -60,15 +58,11 @@ export class LogCleanerService {
     );
   }
 
-  /* ---------- STOP ---------- */
-
   async stop(): Promise<void> {
     await this.job?.stop();
     this.job = null;
     log.info('Log cleaner stopped');
   }
-
-  /* ---------- MANUAL TRIGGER ---------- */
 
   async cleanup(options?: {
     fileRetentionDays?: number;
@@ -96,8 +90,6 @@ export class LogCleanerService {
       duration: Date.now() - start,
     };
   }
-
-  /* ---------- CLEAN DB ---------- */
 
   private async cleanDb(
     retentionDays: number
@@ -145,8 +137,6 @@ export class LogCleanerService {
       };
     }
   }
-
-  /* ---------- CLEAN FILES ---------- */
 
   private async cleanFiles(
     retentionDays: number

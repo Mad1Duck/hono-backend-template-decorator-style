@@ -19,10 +19,6 @@ import { AbstractConstructor, ConcreteConstructor, ControllerInstance } from './
 
 /* ================= TYPES ================= */
 
-// type Constructor<T = unknown> = abstract new (...args: any[]) => T;
-// type ConcreteConstructor<T = unknown> = new (...args: any[]) => T;
-// type ControllerInstance = Record<string, (...args: unknown[]) => unknown>;
-
 type HonoMethod = (
   path: string,
   ...handlers: HonoMiddlewareFn[]
