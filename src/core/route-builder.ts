@@ -15,12 +15,13 @@ import {
 } from '../decorators/metadata';
 import { createRateLimiter } from '@/middleware/rateLimit.middleware';
 import { executeGuards } from '@/middleware/guard.middleware';
+import { AbstractConstructor, ConcreteConstructor, ControllerInstance } from './types';
 
 /* ================= TYPES ================= */
 
-type Constructor<T = unknown> = abstract new (...args: any[]) => T;
-type ConcreteConstructor<T = unknown> = new (...args: any[]) => T;
-type ControllerInstance = Record<string, (...args: unknown[]) => unknown>;
+// type Constructor<T = unknown> = abstract new (...args: any[]) => T;
+// type ConcreteConstructor<T = unknown> = new (...args: any[]) => T;
+// type ControllerInstance = Record<string, (...args: unknown[]) => unknown>;
 
 type HonoMethod = (
   path: string,
@@ -33,7 +34,7 @@ export class HonoRouteBuilder {
   /* ---------- BUILD ---------- */
 
   static build<T>(
-    ControllerClass: Constructor<T>,
+    ControllerClass: AbstractConstructor<T>,
     platform?: 'mobile' | 'web'
   ): Hono {
     const app = new Hono();
@@ -55,8 +56,8 @@ export class HonoRouteBuilder {
 
     /* ----- Resolve Controller Instance ----- */
     const controllerInstance = container.resolve(
-      ControllerClass as unknown as ConcreteConstructor<T>
-    ) as ControllerInstance;
+      ControllerClass as ConcreteConstructor<T>
+    ) as T & ControllerInstance;
 
     /* ----- Filter Routes by Platform ----- */
     const platformRoutes = routes.filter((route) => {
@@ -156,6 +157,7 @@ export class HonoRouteBuilder {
         keyPrefix: rateLimitMeta.keyPrefix || `rl:route:${handlerName}:`,
         message: rateLimitMeta.message,
         keyGenerator: rateLimitMeta.keyGenerator,
+        skipIfDecoratorPresent: false,
       });
 
       middlewares.push(rateLimitMiddleware);
