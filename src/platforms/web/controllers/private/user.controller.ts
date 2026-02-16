@@ -26,7 +26,7 @@ import {
   ValidatedParam,
 } from '@/decorators';
 
-import { UserService } from '@/services/user.service';
+import { UserService } from '@/platforms/web/services/user.service';
 
 import {
   CreateUserSchema,

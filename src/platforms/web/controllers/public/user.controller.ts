@@ -22,7 +22,7 @@ import {
   AuthMiddleware,
   RequireRole,
 } from '@/middleware/auth.middleware';
-import { UserService } from '@/services/user.service';
+import { UserService } from '@/platforms/web/services/user.service';
 import {
   CreateUserSchema,
   UpdateUserSchema,

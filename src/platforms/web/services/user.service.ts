@@ -212,10 +212,10 @@ export class UserService {
   /**
    * Sync user (example: external API)
    */
-  async syncFromJob(
+  syncFromJob(
     data: UserJobData
-  ): Promise<void> {
-    await this.logger.info(
+  ): void {
+    this.logger.info(
       {
         userId: data.userId,
       },
@@ -229,10 +229,10 @@ export class UserService {
   /**
    * Send notification
    */
-  async notifyFromJob(
+  notifyFromJob(
     data: UserJobData
-  ): Promise<void> {
-    await this.logger.info(
+  ): void {
+    this.logger.info(
       {
         userId: data.userId,
       },
