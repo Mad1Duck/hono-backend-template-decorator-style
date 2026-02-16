@@ -1,0 +1,90 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "ESNext"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@config/*": [
+        "./config/*"
+      ],
+      "@decorators/*": [
+        "./decorators/*"
+      ],
+      "@core/*": [
+        "./core/*"
+      ],
+      "@middleware/*": [
+        "./middleware/*"
+      ],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@repositories/*": [
+        "./repositories/*"
+      ],
+      "@validation/*": [
+        "./validation/*"
+      ],
+      "@types/*": [
+        "./types/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@constants/*": [
+        "./constants/*"
+      ]
+    },
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": [
+      "bun-types",
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}
